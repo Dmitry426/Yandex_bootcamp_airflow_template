@@ -23,9 +23,14 @@ build: check_and_rename_env
 innit: build
 	docker compose up airflow-init
 
+run_local_s3:
+	docker compose -f docker-compose.s3.yaml up
+stop_local_s3:
+	docker compose -f docker-compose.s3.yaml down
+
 run:
 	docker compose up -d
 
 stop:
-	docker compose down
+	docker compose down --remove-orphans
 

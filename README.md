@@ -23,6 +23,16 @@ $ make run
 $ make stop
 ```
 
-# Jupiter notebook run in container and can be accessed on port 8888
+# You can run local s3
+```bash
+$ make run_local_s3
+```
+
+# You can stop local s3
+```bash
+$ make stop_local_s3
+```
+
+### Jupiter notebook run in container and can be accessed on port 8888
 
  
