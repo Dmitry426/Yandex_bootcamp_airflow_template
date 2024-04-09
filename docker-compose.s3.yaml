@@ -9,8 +9,6 @@ services:
     environment:
       MINIO_ROOT_USER: "airflow"
       MINIO_ROOT_PASSWORD: "airflow123"
-    networks:
-      - airflow_network
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
       interval: 30s
@@ -37,5 +35,6 @@ services:
       "
 
 networks:
-  airflow_network:
-    name: airflow_network
+  default:
+    external:
+      name: airflow_network
