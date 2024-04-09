@@ -1,6 +1,6 @@
 services:
-  minio:
-    container_name: minio-container
+  s3:
+    container_name: s3-container
     image: minio/minio:latest
     ports:
       - 9000:9000
@@ -9,6 +9,8 @@ services:
     environment:
       MINIO_ROOT_USER: "airflow"
       MINIO_ROOT_PASSWORD: "airflow123"
+    networks:
+      - airflow_network
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
       interval: 30s
@@ -17,10 +19,10 @@ services:
     restart: on-failure
 
 
-  mc-service:
+  s3-service:
     image: minio/mc
     depends_on:
-      minio:
+      s3:
         condition: service_healthy
     restart: on-failure
     entrypoint: >
@@ -33,3 +35,7 @@ services:
       /usr/bin/mc anonymous  set public myminio/mlflow;
       /usr/bin/mc anonymous  set public myminio/lizvladi-mlops;
       "
+
+networks:
+  airflow_network:
+    name: airflow_network

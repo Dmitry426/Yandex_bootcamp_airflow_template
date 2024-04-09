@@ -8,6 +8,8 @@ x-airflow-common:
     AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
+  networks:
+    - airflow_network
   volumes:
     - ./dags:/opt/airflow/dags
     - airflow_logs:/opt/airflow/logs
@@ -27,6 +29,8 @@ services:
       - ./.env
     environment:
       POSTGRES_MULTIPLE_DATABASES: airflow, mlflow
+    networks:
+      - airflow_network
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
       - ./scripts/postgres_init_script:/docker-entrypoint-initdb.d
@@ -40,6 +44,8 @@ services:
     image: redis:latest
     expose:
       - 6379
+    networks:
+      - airflow_network
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 5s
@@ -162,3 +168,8 @@ services:
 volumes:
   postgres-db-volume:
   airflow_logs:
+
+networks:
+  airflow_network:
+    name: airflow_network
+    driver: bridge
