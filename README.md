@@ -4,7 +4,7 @@ Airflow stack postgres and localstack .
 ## Minimum Requirements
 This project supports Ubuntu Linux 18.04 and up. 
 - [Docker 20.10 +](https://docs.docker.com/)
-- [docker-compose  1.29.2 + ](https://docs.docker.com/compose/)
+- [docker-compose  2.25.0 + ](https://docs.docker.com/compose/)
 
  # You must innit Airflow defore working with it by running . 
 

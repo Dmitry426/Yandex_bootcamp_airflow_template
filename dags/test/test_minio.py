@@ -40,7 +40,7 @@ dag = DAG(
     schedule_interval="@once",
 )
 
-rand = randint(1, 1000)
+rand = randintrand = randint(1, 1000)
 
 
 def give_up_connection() -> None:

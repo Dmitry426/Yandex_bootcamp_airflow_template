@@ -20,11 +20,11 @@ build: check_and_rename_env
 	@sleep 15
 
 
-innit: build
+init: build
 	docker compose up airflow-init
 
 run_local_s3:
-	docker compose -f docker-compose.s3.yaml up
+	docker compose -f docker-compose.s3.yaml up -d
 stop_local_s3:
 	docker compose -f docker-compose.s3.yaml down
 
